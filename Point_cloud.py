@@ -4,14 +4,20 @@ from mpl_toolkits.mplot3d import Axes3D
 
 # Simulated data (replace with actual data)
 num_points = 1000
-vertical_positions = np.random.uniform(0, 10, num_points)
-horizontal_positions = np.random.uniform(0, 2*np.pi, num_points)
-distances = np.random.uniform(0.1, 10, num_points)
+
+# Vertical distance (y-axis) - assuming it ranges from 0 to 10 units
+vertical_distances = np.random.uniform(0, 10, num_points)
+
+# Distance measured by the LiDAR sensor - assuming it ranges from 0.1 to 10 units
+lidar_distances = np.random.uniform(0.1, 10, num_points)
+
+# Angle of rotation - assuming it ranges from 0 to 2*pi radians (360 degrees)
+rotation_angles = np.random.uniform(0, 2*np.pi, num_points)
 
 # Convert to Cartesian coordinates
-x = distances * np.cos(horizontal_positions) * np.sin(vertical_positions)
-y = distances * np.sin(horizontal_positions) * np.sin(vertical_positions)
-z = distances * np.cos(vertical_positions)
+x = lidar_distances * np.cos(rotation_angles)
+y = vertical_distances
+z = lidar_distances * np.sin(rotation_angles)
 
 # Visualize the point cloud
 fig = plt.figure()
